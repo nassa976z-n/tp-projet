@@ -10,11 +10,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Recuperer le code
+      - name: Récupérer le code
         uses: actions/checkout@v4
 
-      - name: Tester la presence des fichiers
+      - name: Vérifier la structure du projet
         run: |
-          echo "Verification du projet..."
-          ls -la
-          cat README.md
+          echo "Vérification des fichiers..."
+          test -f README.md && echo "README présent."
+
+      - name: Valider la syntaxe des scripts
+        run: |
+          echo "Analyse des scripts Shell..."
+          find . -name "*.sh" -exec bash -n {} +
